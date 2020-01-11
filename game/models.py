@@ -103,5 +103,11 @@ class Turn(models.Model):
     first_move = models.IntegerField(null=True)
     second_move = models.IntegerField(null=True)
 
+    next_turn = models.ForeignKey(
+        'Turn',
+        on_delete=models.SET_NULL,
+        null=True
+    )
+
     class Meta:
         ordering = ['started']
