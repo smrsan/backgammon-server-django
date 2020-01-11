@@ -7,6 +7,8 @@ class Game(models.Model):
 
     started = models.DateTimeField(null=True)
 
+    private = models.BooleanField(default=False)
+
     # Player1 = owner
     owner = models.ForeignKey(
         'auth.User',
