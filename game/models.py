@@ -76,3 +76,26 @@ class Board(models.Model):
     white_bead_13_position = models.IntegerField(default=12)
     white_bead_14_position = models.IntegerField(default=1)
     white_bead_15_position = models.IntegerField(default=1)
+
+
+class Turn(models.Model):
+    started = models.DateTimeField(auto_now_add=True)
+    ended = models.DateTimeField(null=True)
+
+    game = models.ForeignKey(
+        Game,
+        related_name='turns',
+        on_delete=models.CASCADE,
+    )
+
+    player = models.ForeignKey(
+        'auth.User',
+        on_delete=models.SET_NULL,
+        null=True
+    )
+
+    first_dice = models.IntegerField(null=True)
+    second_dice = models.IntegerField(null=True)
+
+    first_move = models.IntegerField(null=True)
+    second_move = models.IntegerField(null=True)
