@@ -32,6 +32,9 @@ class Game(models.Model):
     is_owner_black = models.BooleanField(default=True)
     is_owner_home_right = models.BooleanField(default=True)
 
+    class Meta:
+        ordering = ['created']
+
 
 class Board(models.Model):
     game = models.OneToOneField(
@@ -99,3 +102,6 @@ class Turn(models.Model):
 
     first_move = models.IntegerField(null=True)
     second_move = models.IntegerField(null=True)
+
+    class Meta:
+        ordering = ['started']
