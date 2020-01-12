@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 
-from rest_framework import serializers
+from rest_framework import serializers, exceptions
 
 from .models import Game, Board, Turn
 from .constants import black_home_end
@@ -46,6 +46,7 @@ class GameSerializer(serializers.ModelSerializer):
     created = serializers.ReadOnlyField(source='created')
     started = serializers.ReadOnlyField(source='started')
     ended = serializers.ReadOnlyField(source='ended')
+    invite_token = serializers.ReadOnlyField(source='invite_token')
     owner = serializers.ReadOnlyField(source='owner.username')
     opponent = serializers.ReadOnlyField(source='opponent.username')
     winner = serializers.ReadOnlyField(source='winner.username')
@@ -58,6 +59,7 @@ class GameSerializer(serializers.ModelSerializer):
             'started',
             'ended',
             'private',
+            'invite_token',
             'owner',
             'opponent',
             'winner',
@@ -66,8 +68,11 @@ class GameSerializer(serializers.ModelSerializer):
         ]
 
     def create(self, validated_data):
-        other_game = Game.objects.get(
-            owner=self.context['request'].user, ended=None)
+        created_game = Game.objects.get(
+            owner=self.context['request'].user.id, ended=None)
+
+        if created_game:
+            raise exceptions.status.HTTP_400_BAD_REQUEST
 
         game = Game.objects.create(**validated_data)
 
