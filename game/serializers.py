@@ -47,8 +47,6 @@ class GameSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     opponent = serializers.ReadOnlyField(source='opponent.username')
     winner = serializers.ReadOnlyField(source='winner.username')
-    board = BoardSerializer(required=False, many=False, read_only=True)
-    turns = TurnSerializer(required=False, many=True, read_only=True)
 
     class Meta:
         model = Game
@@ -61,7 +59,5 @@ class GameSerializer(serializers.ModelSerializer):
             'opponent',
             'winner',
             'is_owner_black',
-            'is_owner_home_right',
-            'board',
-            'turns'
+            'is_owner_home_right'
         ]

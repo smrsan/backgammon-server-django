@@ -34,8 +34,14 @@ class BoardViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = BoardSerializer
     permission_classes = [IsAuthenticated, HasAccessToGameRelatedModels]
 
+    def get_queryset(self):
+        return Board.objects.get(game=self.kwargs['game_pk'])
+
 
 class TurnViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Turn.objects.all()
     serializer_class = TurnSerializer
     permission_classes = [IsAuthenticated, HasAccessToGameRelatedModels]
+
+    def get_queryset(self):
+        return Turn.objects.filter(game=self.kwargs['game_pk'])
