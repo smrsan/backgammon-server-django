@@ -17,23 +17,6 @@ class UserSerializer(serializers.ModelSerializer):
         ]
 
 
-class GameSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Game
-        fields = [
-            'id',
-            'created',
-            'started',
-            'owner',
-            'opponent',
-            'winner',
-            'is_owner_black',
-            'is_owner_home_right',
-            'board',
-            'turns'
-        ]
-
-
 class BoardSerializer(serializers.ModelSerializer):
     class Meta:
         model = Board
@@ -54,4 +37,31 @@ class TurnSerializer(serializers.ModelSerializer):
             'first_move',
             'second_move',
             'next_turn'
+        ]
+
+
+class GameSerializer(serializers.ModelSerializer):
+    id = serializers.ReadOnlyField(source='id')
+    created = serializers.ReadOnlyField(source='created')
+    started = serializers.ReadOnlyField(source='started')
+    owner = serializers.ReadOnlyField(source='owner.username')
+    opponent = serializers.ReadOnlyField(source='opponent.username')
+    winner = serializers.ReadOnlyField(source='winner.username')
+    board = BoardSerializer(required=False, many=False, read_only=True)
+    turns = TurnSerializer(required=False, many=True, read_only=True)
+
+    class Meta:
+        model = Game
+        fields = [
+            'id',
+            'created',
+            'started',
+            'private',
+            'owner',
+            'opponent',
+            'winner',
+            'is_owner_black',
+            'is_owner_home_right',
+            'board',
+            'turns'
         ]
