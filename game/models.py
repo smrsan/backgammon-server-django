@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from .fields import RandomStrField
+
 
 class Game(models.Model):
     created = models.DateTimeField(auto_now_add=True)
@@ -10,6 +12,8 @@ class Game(models.Model):
     ended = models.DateTimeField(null=True)
 
     private = models.BooleanField(default=False)
+
+    invite_token = RandomStrField(max_length=24)
 
     # Player1 = owner
     owner = models.ForeignKey(
