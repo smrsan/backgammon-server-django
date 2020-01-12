@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 
-from rest_framework import viewsets
+from rest_framework import viewsets, mixins
 from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAuthenticated
 
@@ -15,10 +15,18 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = [IsAuthenticated]
 
 
-class GameViewSet(viewsets.ReadOnlyModelViewSet):
+class GameViewSet(
+    mixins.CreateModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.ListModelMixin,
+    viewsets.GenericViewSet
+):
     queryset = Game.objects.all()
     serializer_class = GameSerializer
     permission_classes = [IsAuthenticated, HasAccessToGame]
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
 
 
 class BoardViewSet(viewsets.ReadOnlyModelViewSet):
