@@ -13,6 +13,7 @@ djangorestframework = "*"
 celery = "*"
 channels = "*"
 drf-nested-routers = "*"
+channels-redis = "*"
 
 [requires]
 python_version = "3.7"
