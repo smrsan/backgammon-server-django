@@ -42,11 +42,6 @@ class TurnSerializer(serializers.ModelSerializer):
 
 
 class GameSerializer(serializers.ModelSerializer):
-    id = serializers.ReadOnlyField(source='id')
-    created = serializers.ReadOnlyField(source='created')
-    started = serializers.ReadOnlyField(source='started')
-    ended = serializers.ReadOnlyField(source='ended')
-    invite_token = serializers.ReadOnlyField(source='invite_token')
     owner = serializers.ReadOnlyField(source='owner.username')
     opponent = serializers.ReadOnlyField(source='opponent.username')
     winner = serializers.ReadOnlyField(source='winner.username')
@@ -65,6 +60,13 @@ class GameSerializer(serializers.ModelSerializer):
             'winner',
             'is_owner_black',
             'is_owner_home_start'
+        ]
+        read_only_field = [
+            'id',
+            'created',
+            'started',
+            'ended',
+            'invite_token'
         ]
 
     def create(self, validated_data):
