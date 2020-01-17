@@ -4,7 +4,7 @@ from rest_framework import serializers, exceptions
 
 from .models import Game, Board, Turn
 from .constants import black_home_end
-from .utils import has_game
+from .db_utils import has_game
 
 
 class UserSerializer(serializers.ModelSerializer):
