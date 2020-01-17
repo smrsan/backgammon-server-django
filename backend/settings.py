@@ -123,6 +123,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# REST Framework
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+
 # Channels
 ASGI_APPLICATION = 'backend.routing.application'
 CHANNEL_LAYERS = {
