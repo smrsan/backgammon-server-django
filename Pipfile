@@ -14,6 +14,7 @@ celery = "*"
 channels = "*"
 drf-nested-routers = "*"
 channels-redis = "*"
+jsonfield2 = "*"
 
 [requires]
 python_version = "3.7"

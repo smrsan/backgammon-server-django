@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "4b00f8945105051cb200524704b636500468f060d4d1cdc6b542002531e25f56"
+            "sha256": "be45849a715588ce2fe4ac4ca984e037df4af7d08fd970f1eec2b9e1081f7a20"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -272,6 +272,13 @@
             ],
             "version": "==17.5.0"
         },
+        "jsonfield2": {
+            "hashes": [
+                "sha256:baddc916f30fb4fd9e2b68bcbd8d20c5db4466b79588f0ccc3959961f0e9b568"
+            ],
+            "index": "pypi",
+            "version": "==3.1.0"
+        },
         "kombu": {
             "hashes": [
                 "sha256:2a9e7adff14d046c9996752b2c48b6d9185d0b992106d5160e1a179907a5d4ac",
@@ -334,10 +341,10 @@
         },
         "pyhamcrest": {
             "hashes": [
-                "sha256:d31a6793c6e5fa47137d7be3e796df3645b0afa0092db01ec946d6bee086ab8c",
-                "sha256:f7ae19ddfd71f11a421bcec9608d708c0fab816db98b51fdbc672a6d99a30874"
+                "sha256:36cda5e849e3ee9ce54628667471e5e769f596259bb3c13c3596f6059a615ef8",
+                "sha256:5959cb4ab465b303522d2e0d270a6ee581c3ad9ba419e304bb6ebe50a60ea37a"
             ],
-            "version": "==1.10.1"
+            "version": "==2.0.0"
         },
         "pyopenssl": {
             "hashes": [
