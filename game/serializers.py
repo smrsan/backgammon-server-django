@@ -65,7 +65,7 @@ class GameSerializer(serializers.ModelSerializer):
             'is_owner_black',
             'is_owner_home_start'
         ]
-        read_only_field = [
+        read_only_fields = [
             'id',
             'created',
             'started',
