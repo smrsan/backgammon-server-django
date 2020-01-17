@@ -21,7 +21,10 @@ class UserSerializer(serializers.ModelSerializer):
 class BoardSerializer(serializers.ModelSerializer):
     class Meta:
         model = Board
-        fields = '__all__'
+        fields = [
+            'game',
+            'beads',
+        ]
 
 
 class TurnSerializer(serializers.ModelSerializer):
@@ -78,12 +81,14 @@ class GameSerializer(serializers.ModelSerializer):
 
         game = Game.objects.create(**validated_data)
 
-        is_owner_black = validated_data.get('is_owner_black', True)
-        is_owner_home_start = validated_data.get('is_owner_home_start', True)
+        is_owner_black = validated_data.get(
+            'is_owner_black', Game.is_owner_black.default)
+        is_owner_home_start = validated_data.get(
+            'is_owner_home_start', Game.is_owner_home_start.default)
 
         if is_owner_black and not is_owner_home_start or \
                 not is_owner_black and is_owner_home_start:
-            Board.objects.create(game=game, **black_home_end)
+            Board.objects.create(game=game, beads=black_home_end)
         else:
             Board.objects.create(game=game)
 
