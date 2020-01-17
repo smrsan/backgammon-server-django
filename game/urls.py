@@ -3,7 +3,14 @@ from django.urls import path, include
 from rest_framework.routers import SimpleRouter
 from rest_framework_nested.routers import NestedSimpleRouter
 
-from .views import UserViewSet, GameViewSet, BoardViewSet, TurnViewSet
+from .views import (
+    UserViewSet,
+    GameViewSet,
+    BoardViewSet,
+    TurnViewSet,
+    GameWsResponseTypes,
+    ChatWsResponseTypes,
+)
 
 
 router_v1 = SimpleRouter()
@@ -15,5 +22,7 @@ games_router_v1.register(r'board', BoardViewSet)
 games_router_v1.register(r'turns', TurnViewSet)
 
 urlpatterns = [
-    path('v1/', include(router_v1.urls))
+    path('v1/', include(router_v1.urls)),
+    path('v1/game/ws-response-types/', GameWsResponseTypes),
+    path('v1/chat/ws-response-types/', ChatWsResponseTypes),
 ]

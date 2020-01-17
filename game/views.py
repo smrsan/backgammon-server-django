@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from rest_framework import viewsets, mixins
 from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 
 from .models import Game, Board, Turn
 from .serializers import UserSerializer, GameSerializer, BoardSerializer, TurnSerializer
@@ -45,3 +46,13 @@ class TurnViewSet(viewsets.ReadOnlyModelViewSet):
 
     def get_queryset(self):
         return Turn.objects.filter(game=self.kwargs['game_pk'])
+
+
+@api_view(['GET'])
+def GameWsResponseTypes(request, format=None):
+    return Response({})
+
+
+@api_view(['GET'])
+def ChatWsResponseTypes(request, format=None):
+    return Response({})
