@@ -4,6 +4,7 @@ from rest_framework import serializers, exceptions
 
 from .models import Game, Board, Turn
 from .constants import black_home_end
+from .utils import has_game
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -73,10 +74,9 @@ class GameSerializer(serializers.ModelSerializer):
         ]
 
     def create(self, validated_data):
-        created_game = Game.objects.get(
-            owner=self.context['request'].user.id, ended=None)
+        user_id = self.context['request'].user.id
 
-        if created_game:
+        if has_game(user_id):
             raise exceptions.status.HTTP_400_BAD_REQUEST
 
         game = Game.objects.create(**validated_data)
