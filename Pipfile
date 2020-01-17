@@ -15,6 +15,7 @@ channels = "*"
 drf-nested-routers = "*"
 channels-redis = "*"
 jsonfield2 = "*"
+djangorestframework-simplejwt = "*"
 
 [requires]
 python_version = "3.7"
