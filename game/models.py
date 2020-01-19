@@ -41,7 +41,7 @@ class Game(models.Model):
     )
 
     is_owner_black = models.BooleanField(default=True)
-    is_owner_home_start = models.BooleanField(default=True)
+    is_owner_home_left = models.BooleanField(default=True)
 
     class Meta:
         ordering = ['created']

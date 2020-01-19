@@ -63,7 +63,7 @@ class GameSerializer(serializers.ModelSerializer):
             'opponent',
             'winner',
             'is_owner_black',
-            'is_owner_home_start'
+            'is_owner_home_left'
         ]
         read_only_fields = [
             'id',
@@ -83,11 +83,11 @@ class GameSerializer(serializers.ModelSerializer):
 
         is_owner_black = validated_data.get(
             'is_owner_black', Game.is_owner_black.default)
-        is_owner_home_start = validated_data.get(
-            'is_owner_home_start', Game.is_owner_home_start.default)
+        is_owner_home_left = validated_data.get(
+            'is_owner_home_left', Game.is_owner_home_left.default)
 
-        if is_owner_black and not is_owner_home_start or \
-                not is_owner_black and is_owner_home_start:
+        if is_owner_black and not is_owner_home_left or \
+                not is_owner_black and is_owner_home_left:
             Board.objects.create(game=game, beads=black_home_end)
         else:
             Board.objects.create(game=game)
